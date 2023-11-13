@@ -8,22 +8,37 @@ const data = {
 
 // Only edit below
 
-const { first = 1 } = data.first || {}
-const { second = 1 } = data.second || {}
-const { third = 1 } = data.third || {}
+const {lists: [
+    [,first],
+    [,second],
+    [,third]
+]} = data
 
 const result = []
 
 const extractBiggest = () => {
-	if (first[-1] > second[-1]) {
-		return first
-	}
-
-	if (third[-1] < 1) {
-		return second
-	}
-	
-	return third
+    // insert 0 into empty arrays
+    if (first.length === 0) {
+        first.push(0)
+    }
+    if (second.length === 0) {
+        second.push(0)
+    }
+    if (third.length === 0) {
+        third.push(0)
+    }
+    // find largest of last items in the 3 arrays and pop it
+	if (first.at(-1) > second.at(-1) && first.at(-1) > third.at(-1)) {
+        return first.pop() 
+    } 
+    
+    else if (second.at(-1) > first.at(-1) && second.at(-1) > third.at(-1)) {
+        return second.pop()
+    } 
+    
+    else if (third.at(-1) > first.at(-1) && third.at(-1) > second.at(-1)){
+        return third.pop()
+    } 
 }
 
 // Only edit above
